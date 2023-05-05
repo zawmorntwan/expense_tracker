@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'expenses_list/expenses_list.dart';
 import '../models/expanse.dart';
+import 'new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -26,9 +27,27 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const NewExpense(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('ExpenseTracker'),
+        actions: [
+          IconButton(
+            onPressed: _openAddExpenseOverlay,
+            icon: const Icon(
+              Icons.add,
+            ),
+          )
+        ],
+      ),
       body: Column(
         children: [
           const Text('Chart'),
